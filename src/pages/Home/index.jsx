@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCard";
-// import { products } from "../../assets/data/data";
-// import { Heading } from "../../common/Heading";
-// import { ProductItems } from "./ProductItems";
 
 const Home = () => {
-  // const [cartItems, setCartItems] = useState(products);
+  const [cartItems, setCartItems] = useState([]);
+  console.log("🚀 ~ file: index.jsx:10 ~ Home ~ cartItems", cartItems);
+
+  useEffect(() => {
+    axios
+      .get("https://dummyjson.com/products")
+      .then(function (response) {
+        // console.log(response);
+        const data = response?.data?.products;
+        setCartItems(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <section className="product border border-red-500">
@@ -19,7 +32,11 @@ const Home = () => {
 
         {/* <ProductItems cartItems={cartItems} /> */}
         <div className="border border-red-500">
-          <ProductCard />
+          {/* {cartItems.map((item) => {
+            <> */}
+          <ProductCard cartItems={cartItems} />
+          {/* </>; */}
+          {/* })} */}
         </div>
       </section>
     </>

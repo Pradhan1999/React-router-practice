@@ -1,7 +1,7 @@
 import React from "react";
 import arrow from "../../assets/arrow1.gif";
 
-const ProductCard = () => {
+const ProductCard = (props) => {
   return (
     <div>
       <div className="max-w-[22rem] rounded-2xl overflow-hidden shadow-lg border border-[#c9c6c6]">
@@ -11,7 +11,7 @@ const ProductCard = () => {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+          <div className="font-bold text-xl mb-2">{props.name}</div>
           <p className="text-gray-700 text-base">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Voluptatibus quia, nulla! Maiores et perferendis eaque,

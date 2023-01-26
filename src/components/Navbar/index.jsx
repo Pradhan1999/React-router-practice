@@ -7,6 +7,18 @@ import NavLinks from "./NavLinks";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
+  // // Make a request for a user with a given ID
+  // axios
+  //   .get("/user?ID=12345")
+  //   .then(function (response) {
+  //     // handle success
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     // handle error
+  //     console.log(error);
+  //   });
+
   return (
     <nav className=" bg-white sticky top-0 border-b border-blue-500">
       <div className="flex items-center font-medium justify-around">
