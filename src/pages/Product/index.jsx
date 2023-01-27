@@ -1,6 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Product = () => {
+  const [details, setDetails] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`https://dummyjson.com/products/${id}`)
+      .then((res) => setDetails(res?.data));
+  }, []);
+
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
@@ -9,7 +20,7 @@ const Product = () => {
             <div>
               <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 border border-red-500">
                 <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
-                  <span className="text-5xl">1</span>
+                  <img src={details.thumbnail} alt="" />
                 </div>
               </div>
 
@@ -24,35 +35,35 @@ const Product = () => {
               </div>
             </div>
           </div>
-          <div className="md:flex-1 px-4">
+          <div className="flex-1 flex-row px-4 ">
             <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
-              Lorem ipsum dolor, sit amet consectetur, adipisicing elit.
+              {details?.title}
             </h2>
             <p className="text-gray-500 text-sm">
-              By{" "}
-              <a href="#" className="text-indigo-600 hover:underline">
-                ABC Company
-              </a>
+              By
+              <p className="text-indigo-600 hover:underline">
+                {details?.brand}
+              </p>
             </p>
 
             <div className="flex items-center space-x-4 my-4">
               <div>
                 <div className="rounded-lg bg-gray-100 flex py-2 px-3">
-                  <span className="text-indigo-400 mr-1 mt-1">$</span>
-                  <span className="font-bold text-indigo-600 text-3xl">25</span>
+                  <span className="text-indigo-400 mr-1 mt-1">₨</span>
+                  <span className="font-bold text-indigo-600 text-3xl">
+                    {details?.price}
+                  </span>
                 </div>
               </div>
               <div className="flex-1">
-                <p className="text-green-500 text-xl font-semibold">Save 12%</p>
+                <p className="text-green-500 text-xl font-semibold">
+                  {details?.discountPercentage}% Off
+                </p>
                 <p className="text-gray-400 text-sm">Inclusive of all Taxes.</p>
               </div>
             </div>
 
-            <p className="text-gray-500">
-              Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Vitae
-              exercitationem porro saepe ea harum corrupti vero id laudantium
-              enim, libero blanditiis expedita cupiditate a est.
-            </p>
+            <p className="text-gray-500">{details?.description}</p>
 
             <div className="flex py-4 space-x-4">
               <div className="relative">
@@ -77,7 +88,7 @@ const Product = () => {
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
+                    // stroke-width="2"
                     d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                   />
                 </svg>

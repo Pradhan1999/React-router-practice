@@ -10,8 +10,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Product />} />
-        {/* This is comment */}
+        <Route path="/products/:id" element={<Product />} />
       </Routes>
     </>
   );
