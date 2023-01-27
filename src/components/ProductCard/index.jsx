@@ -19,7 +19,7 @@ const ProductCard = (props) => {
           <p className="text-gray-700 text-base">{props.description}</p>
         </div>
         <div className="flex justify-end px-5 ">
-          <button className="border border-blue-500 w-10 rounded-full cursor-pointer p-5">
+          <button className="border border-blue-500 w-10 rounded-full cursor-pointer">
             <img
               src={arrow}
               alt="arrow"
