@@ -31,12 +31,12 @@ const SingleProduct = () => {
             <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
               {details?.title}
             </h2>
-            <p className="text-gray-500 text-sm">
+            <div className="text-gray-500 text-sm">
               By
-              <p className="text-indigo-600 hover:underline">
+              <div className="text-indigo-600 hover:underline">
                 {details?.brand}
-              </p>
-            </p>
+              </div>
+            </div>
 
             <div className="flex items-center space-x-4 my-4">
               <div>
@@ -48,14 +48,16 @@ const SingleProduct = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <p className="text-green-500 text-xl font-semibold">
+                <div className="text-green-500 text-xl font-semibold">
                   {details?.discountPercentage}% Off
-                </p>
-                <p className="text-gray-400 text-sm">Inclusive of all Taxes.</p>
+                </div>
+                <div className="text-gray-400 text-sm">
+                  Inclusive of all Taxes.
+                </div>
               </div>
             </div>
 
-            <p className="text-gray-500">{details?.description}</p>
+            <div className="text-gray-500">{details?.description}</div>
 
             <div className="flex py-4 space-x-4">
               <div className="relative">
@@ -69,21 +71,6 @@ const SingleProduct = () => {
                   <option>4</option>
                   <option>5</option>
                 </select>
-
-                <svg
-                  className="w-5 h-5 text-gray-400 absolute right-0 bottom-0 mb-2 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    // stroke-width="2"
-                    d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                  />
-                </svg>
               </div>
 
               <button

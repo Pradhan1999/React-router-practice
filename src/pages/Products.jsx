@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, createContext } from "react";
 import Card from "../components/Card";
+
+export const ProductDataContext = createContext();
 
 const Products = () => {
   // State for storing the items in the cart
@@ -50,7 +51,9 @@ const Products = () => {
     <div>
       <div className="grid grid-cols-4 gap-5">
         {products?.map((item, id) => (
-          <Card key={id} item={item} />
+          <ProductDataContext.Provider value={item} key={id}>
+            <Card />
+          </ProductDataContext.Provider>
         ))}
       </div>
     </div>

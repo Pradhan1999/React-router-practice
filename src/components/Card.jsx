@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import arrow from "../assets/arrow1.gif";
+import { ProductDataContext } from "../pages/Products";
 
-const Card = ({ item }) => {
+const Card = () => {
   const navigate = useNavigate();
-  const { id, title, description, brand, thumbnail } = item;
+  const { id, title, description, brand, thumbnail } =
+    useContext(ProductDataContext);
+
+  // const [name, last] = useContext(UserContext);
 
   return (
     <div>
