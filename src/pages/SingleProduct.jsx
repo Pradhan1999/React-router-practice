@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const Product = () => {
+const SingleProduct = () => {
   const [details, setDetails] = useState([]);
   const { id } = useParams();
 
@@ -18,20 +18,12 @@ const Product = () => {
         <div className="flex flex-col md:flex-row -mx-4">
           <div className="md:flex-1 px-4">
             <div>
-              <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 border border-red-500">
-                <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
-                  <img src={details.thumbnail} alt="" />
-                </div>
-              </div>
-
-              <div className="flex -mx-2 mb-4">
-                <div>
-                  <div className="flex-1 px-2">
-                    <button className="focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center">
-                      <span className="text-2xl"></span>
-                    </button>
-                  </div>
-                </div>
+              <div className="h-64 md:h-80 w-[90%] rounded-lg bg-gray-100 mb-4 flex items-center justify-center shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
+                <img
+                  src={details.thumbnail}
+                  className="h-[90%] w-[90%] rounded-lg"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -108,4 +100,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProduct;
