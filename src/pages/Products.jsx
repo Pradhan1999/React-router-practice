@@ -5,8 +5,6 @@ import Card from "../components/Card";
 export const ProductDataContext = createContext();
 
 const Products = () => {
-  // State for storing the items in the cart
-  const [cart, setCart] = useState([]);
   // State for storing the products from the dummy JSON data
   const [products, setProducts] = useState([]);
   // console.log("cartItems :>> ", cartItems);
@@ -26,8 +24,8 @@ const Products = () => {
   }, []);
 
   // Function for adding a product to the cart
-  const addToCart = (product) => {
-    setCart([...cart, product]);
+  const handleAddProduct = () => {
+    // function
   };
 
   // loading button

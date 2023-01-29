@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const SingleProduct = () => {
+  // State for storing the items in the cart
+  const [cartItems, setCartItems] = useState([]);
   const [details, setDetails] = useState([]);
   const { id } = useParams();
 
@@ -11,6 +13,21 @@ const SingleProduct = () => {
       .get(`https://dummyjson.com/products/${id}`)
       .then((res) => setDetails(res?.data));
   }, []);
+
+  const handleAddProduct = (details) => {
+    const ProductExist = cartItems.find((item) => item.id === details.id);
+    if (ProductExist) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === details.id
+            ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...details, quantity: 1 }]);
+    }
+  };
 
   return (
     <div>
@@ -76,6 +93,7 @@ const SingleProduct = () => {
               <button
                 type="button"
                 className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
+                onClick={handleAddProduct(details)}
               >
                 Add to Cart
               </button>
