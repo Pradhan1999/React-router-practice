@@ -1,29 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartDetailContext } from "../App";
 
-const Cart = ({ cart }) => {
-  console.log("🚀 ~ file: Cart.jsx:4 ~ Cart ~ cart", cart);
-  //   const { cart } = useCartContext();
-  //   console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
+const Cart = () => {
+  const { cartItems } = useContext(CartDetailContext);
 
-  // const { id, title, description, brand, thumbnail } = item;
-  // const { brand } = cart;
   return (
     <>
       <div className="container">
         <div className="cart_heading grid grid-five-column">
-          <p>{cart?.brand}</p>
-          <p className="cart-hide">Price</p>
-          <p>Quantity</p>
-          <p className="cart-hide">Subtotal</p>
-          <p>Remove</p>
+          {cartItems?.map((item) => (
+            <div key={item?.id}>
+              <p>{item?.brand}</p>
+              <p className="cart-hide">{item?.title}</p>
+              <p>Quantity</p>
+              <p className="cart-hide">Subtotal</p>
+              <p>Remove</p>
+            </div>
+          ))}
         </div>
         <hr />
 
-        <div className="cart-item">
-          {/* {cart.map((curElem) => {
-            return <CartItem key={curElem.id} {...curElem} />;
-          })} */}
-        </div>
+        <div className="cart-item"></div>
       </div>
     </>
   );

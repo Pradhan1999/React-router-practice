@@ -1,33 +1,45 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { CartDetailContext } from "../App";
 
 const SingleProduct = () => {
-  // State for storing the items in the cart
-  const [cartItems, setCartItems] = useState([]);
   const [details, setDetails] = useState([]);
-  const { id } = useParams();
+  const { ids } = useParams();
+
+  const { cartItems, setCartItems } = useContext(CartDetailContext);
+  console.log("cartItems", cartItems);
 
   useEffect(() => {
     axios
-      .get(`https://dummyjson.com/products/${id}`)
+      .get(`https://dummyjson.com/products/${ids}`)
       .then((res) => setDetails(res?.data));
   }, []);
 
-  const handleAddProduct = (details) => {
-    const ProductExist = cartItems.find((item) => item.id === details.id);
-    if (ProductExist) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === details.id
-            ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
-            : item
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...details, quantity: 1 }]);
-    }
-  };
+  // const handleAddProduct = () => {
+  //   const ProductExist = cartItems?.products?.map(
+  //     (item) => item.id === details.id
+  //   );
+  //   console.log("ProductExist", ProductExist);
+  //   // const ProductExist = cartItems?.products?.map((item) =>
+  //   //   console.log("abc", item)
+  //   // );
+  //   // console.log("ProductExist", ProductExist);
+  //   // console.log("products1", products);
+  //   // if (ProductExist) {
+  //   //   setKhaliState(
+  //   //     [...khaliState, cartItems?.products]
+  //   //     // products.map((item) =>
+  //   //     //   item.id === details.id
+  //   //     //     ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
+  //   //     //     : item
+  //   //     // )
+  //   //   );
+  //   // }
+  //   // else {
+  //   //   setKhaliState([...products, { ...details, quantity: 1 }]);
+  //   // }
+  // };
 
   return (
     <div>
@@ -93,7 +105,7 @@ const SingleProduct = () => {
               <button
                 type="button"
                 className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
-                onClick={handleAddProduct(details)}
+                onClick={() => setCartItems([...cartItems, details])}
               >
                 Add to Cart
               </button>
