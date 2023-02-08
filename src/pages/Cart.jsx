@@ -1,32 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartDetailContext } from "../App";
 
 const Cart = () => {
-  const { cartItems } = useContext(CartDetailContext);
+  const [amount, setAmount] = useState(1);
+
+  const { cartItems, setCartItems } = useContext(CartDetailContext);
   console.log("cartItems", cartItems);
+
+  const setDecrease = () => {
+    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+  };
+
+  const setIncrease = () => {
+    amount < 10 ? setAmount(amount + 1) : setAmount(10);
+  };
 
   return (
     <>
       <div className="container">
-        {/* <div className="cart_heading grid grid-five-column">
-          {cartItems?.map((item) => (
-            <div key={item?.id}>
-              <p>{item?.brand}</p>
-              <p className="cart-hide">{item?.title}</p>
-              <p>Quantity</p>
-              <p className="cart-hide">Subtotal</p>
-              <p>Remove</p>
-            </div>
-          ))}
-        </div> */}
-
         {/* _________ */}
         <div className="container mx-auto mt-10">
           <div className="flex shadow-md my-10">
             <div className="w-3/4 bg-white px-10 py-10">
               <div className="flex justify-between border-b pb-8">
                 <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-                <h2 className="font-semibold text-2xl">3 Items</h2>
+                <h2 className="font-semibold text-2xl">
+                  {cartItems?.length} Items
+                </h2>
               </div>
               <div className="flex mt-10 mb-5">
                 <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
@@ -49,45 +49,55 @@ const Cart = () => {
                 >
                   <div className="flex w-2/5">
                     <div className="w-20">
-                      <img className="h-24" src={item?.images[4]} alt="" />
+                      <img className="h-24" src={item?.images[0]} alt="" />
                     </div>
                     <div className="flex flex-col justify-between ml-4 flex-grow">
-                      <span className="font-bold text-sm">Iphone 6S</span>
-                      <span className="text-red-500 text-xs">Apple</span>
-                      <a
-                        href="#"
-                        className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                      <span className="font-bold text-sm">{item?.title}</span>
+                      <span className="text-red-500 text-xs">
+                        {item?.brand}
+                      </span>
+                      <div
+                        onClick={() => setCartItems([])}
+                        className="font-semibold hover:text-red-500 text-gray-500 text-xs cursor-pointer"
                       >
                         Remove
-                      </a>
+                      </div>
                     </div>
                   </div>
                   <div className="flex justify-center w-1/5">
-                    <svg
-                      className="fill-current text-gray-600 w-3"
-                      viewBox="0 0 448 512"
+                    {/* -----decrease--- */}
+                    <div
+                      onClick={() => setDecrease()}
+                      className="mt-2 cursor-pointer"
                     >
-                      <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                    </svg>
+                      <svg
+                        className="fill-current text-gray-600 w-3"
+                        viewBox="0 0 448 512"
+                      >
+                        <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                      </svg>
+                    </div>
 
-                    <input
-                      className="mx-2 border text-center w-8"
-                      type="text"
-                      // value="1"
-                    />
+                    <div className="mx-2 border text-center w-8">{amount}</div>
 
-                    <svg
-                      className="fill-current text-gray-600 w-3"
-                      viewBox="0 0 448 512"
+                    {/* ----increase----- */}
+                    <div
+                      onClick={() => setIncrease()}
+                      className="mt-2 cursor-pointer"
                     >
-                      <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                    </svg>
+                      <svg
+                        className="fill-current text-gray-600 w-3"
+                        viewBox="0 0 448 512"
+                      >
+                        <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                      </svg>
+                    </div>
                   </div>
                   <span className="text-center w-1/5 font-semibold text-sm">
-                    $400.00
+                    ${item?.price}
                   </span>
                   <span className="text-center w-1/5 font-semibold text-sm">
-                    $400.00
+                    ${item?.price * amount}
                   </span>
                 </div>
               ))}
@@ -111,8 +121,10 @@ const Cart = () => {
                 Order Summary
               </h1>
               <div className="flex justify-between mt-10 mb-5">
-                <span className="font-semibold text-sm uppercase">Items 3</span>
-                <span className="font-semibold text-sm">590$</span>
+                <span className="font-semibold text-sm uppercase">
+                  Items {cartItems?.length}
+                </span>
+                {/* <span className="font-semibold text-sm">590$</span> */}
               </div>
               <div>
                 <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -140,10 +152,10 @@ const Cart = () => {
                 Apply
               </button>
               <div className="border-t mt-8">
-                <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+                {/* <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                   <span>Total cost</span>
                   <span>$600</span>
-                </div>
+                </div> */}
                 <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                   Checkout
                 </button>

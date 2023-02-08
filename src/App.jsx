@@ -1,10 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import SingleProduct from "./pages/SingleProduct";
-import axios from "axios";
 
 export const CartDetailContext = createContext();
 
@@ -15,26 +14,14 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/singleProduct/:ids"
-          element={
-            <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
-              <SingleProduct />
-            </CartDetailContext.Provider>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
-              <Cart />
-            </CartDetailContext.Provider>
-          }
-        />
-      </Routes>
+      <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/singleProduct/:ids" element={<SingleProduct />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </CartDetailContext.Provider>
     </>
   );
 }

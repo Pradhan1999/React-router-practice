@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/home2.gif";
 import Cart from "../../assets/cart.gif";
 import NavLinks from "./NavLinks";
+import { CartDetailContext } from "../../App";
 
 const Navbar = () => {
+  const { cartItems } = useContext(CartDetailContext);
   const bottomToTop = () => {
     window.scrollTo({
       top: 0,
@@ -32,10 +34,13 @@ const Navbar = () => {
           </li>
           <NavLinks />
         </ul>
-        <div>
+        <div className="flex flex-row">
           <NavLink to="/cart">
             <img src={Cart} alt="logo" className="cursor-pointer h-14" />
           </NavLink>
+          <div className="w-5 h-5 rounded-full bg-blue-400 text-white items-center flex justify-center">
+            {cartItems?.length}
+          </div>
         </div>
       </div>
     </nav>
