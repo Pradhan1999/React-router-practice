@@ -7,14 +7,13 @@ import { CartDetailContext } from "../../App";
 
 const Navbar = () => {
   const { cartItems } = useContext(CartDetailContext);
+
   const bottomToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
-
-  const { cartItems } = useContext(CartDetailContext);
 
   return (
     <nav className=" bg-white sticky top-0 border-b border-blue-500 shadow-xl">
