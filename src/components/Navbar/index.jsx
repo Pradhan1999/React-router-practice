@@ -6,6 +6,7 @@ import NavLinks from "./NavLinks";
 import { CartDetailContext } from "../../App";
 
 const Navbar = () => {
+  const { cartItems } = useContext(CartDetailContext);
   const bottomToTop = () => {
     window.scrollTo({
       top: 0,
@@ -35,11 +36,13 @@ const Navbar = () => {
           </li>
           <NavLinks />
         </ul>
-        <div className="flex">
+        <div className="flex flex-row">
           <NavLink to="/cart">
             <img src={Cart} alt="logo" className="cursor-pointer h-14" />
           </NavLink>
-          <div className="">{cartItems.length}</div>
+          <div className="w-5 h-5 rounded-full bg-blue-400 text-white items-center flex justify-center">
+            {cartItems?.length}
+          </div>
         </div>
       </div>
     </nav>

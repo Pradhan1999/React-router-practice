@@ -8,38 +8,12 @@ const SingleProduct = () => {
   const { ids } = useParams();
 
   const { cartItems, setCartItems } = useContext(CartDetailContext);
-  console.log("cartItems", cartItems);
 
   useEffect(() => {
     axios
       .get(`https://dummyjson.com/products/${ids}`)
       .then((res) => setDetails(res?.data));
   }, []);
-
-  // const handleAddProduct = () => {
-  //   const ProductExist = cartItems?.products?.map(
-  //     (item) => item.id === details.id
-  //   );
-  //   console.log("ProductExist", ProductExist);
-  //   // const ProductExist = cartItems?.products?.map((item) =>
-  //   //   console.log("abc", item)
-  //   // );
-  //   // console.log("ProductExist", ProductExist);
-  //   // console.log("products1", products);
-  //   // if (ProductExist) {
-  //   //   setKhaliState(
-  //   //     [...khaliState, cartItems?.products]
-  //   //     // products.map((item) =>
-  //   //     //   item.id === details.id
-  //   //     //     ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
-  //   //     //     : item
-  //   //     // )
-  //   //   );
-  //   // }
-  //   // else {
-  //   //   setKhaliState([...products, { ...details, quantity: 1 }]);
-  //   // }
-  // };
 
   return (
     <div>
@@ -105,7 +79,10 @@ const SingleProduct = () => {
               <button
                 type="button"
                 className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
-                onClick={() => {setCartItems([...cartItems, details]); alert("added to cart")}}
+                onClick={() => {
+                  setCartItems([...cartItems, details]);
+                  alert("Item added to the cart 🛒");
+                }}
               >
                 Add to Cart
               </button>
