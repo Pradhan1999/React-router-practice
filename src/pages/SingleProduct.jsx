@@ -105,7 +105,7 @@ const SingleProduct = () => {
               <button
                 type="button"
                 className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
-                onClick={() => setCartItems([...cartItems, details])}
+                onClick={() => {setCartItems([...cartItems, details]); alert("added to cart")}}
               >
                 Add to Cart
               </button>

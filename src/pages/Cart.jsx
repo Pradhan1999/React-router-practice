@@ -2,8 +2,16 @@ import React, { useContext } from "react";
 import { CartDetailContext } from "../App";
 
 const Cart = () => {
-  const { cartItems } = useContext(CartDetailContext);
+  const { cartItems, setCartItems } = useContext(CartDetailContext);
   console.log("cartItems", cartItems);
+
+  const itemExists = cartItems.find((item) => {
+    if (item.id === cartItems.id) {
+      item.quantity += quantityKanap;
+      return true;
+    }
+    return false;
+  });
 
   return (
     <>
@@ -26,7 +34,9 @@ const Cart = () => {
             <div className="w-3/4 bg-white px-10 py-10">
               <div className="flex justify-between border-b pb-8">
                 <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-                <h2 className="font-semibold text-2xl">3 Items</h2>
+                <h2 className="font-semibold text-2xl">
+                  {cartItems.length} Items
+                </h2>
               </div>
               <div className="flex mt-10 mb-5">
                 <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
@@ -49,11 +59,13 @@ const Cart = () => {
                 >
                   <div className="flex w-2/5">
                     <div className="w-20">
-                      <img className="h-24" src={item?.images[4]} alt="" />
+                      <img className="h-24" src={item?.images[0]} alt="" />
                     </div>
                     <div className="flex flex-col justify-between ml-4 flex-grow">
-                      <span className="font-bold text-sm">Iphone 6S</span>
-                      <span className="text-red-500 text-xs">Apple</span>
+                      <span className="font-bold text-sm">{item?.title}</span>
+                      <span className="text-red-500 text-xs">
+                        {item?.brand}
+                      </span>
                       <a
                         href="#"
                         className="font-semibold hover:text-red-500 text-gray-500 text-xs"
@@ -73,7 +85,97 @@ const Cart = () => {
                     <input
                       className="mx-2 border text-center w-8"
                       type="text"
-                      // value="1"
+                      value="1"
+                      onChange={(e) => {
+                        const card = [];
+                        card = item.map((items) => {
+                          if (items.id === item.id) {
+                            return {
+                              ...item,
+                              quantity: e.target.value,
+                              price: items.price * e.target.value,
+                            };
+                          } else {
+                            cartItems;
+                          }
+                        });
+                      }}                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      
                     />
 
                     <svg
@@ -84,11 +186,9 @@ const Cart = () => {
                     </svg>
                   </div>
                   <span className="text-center w-1/5 font-semibold text-sm">
-                    $400.00
+                    ₨ {item?.price}
                   </span>
-                  <span className="text-center w-1/5 font-semibold text-sm">
-                    $400.00
-                  </span>
+                  <span className="text-center w-1/5 font-semibold text-sm"></span>
                 </div>
               ))}
 

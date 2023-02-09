@@ -7,6 +7,7 @@ import SingleProduct from "./pages/SingleProduct";
 import axios from "axios";
 
 export const CartDetailContext = createContext();
+// export const CartDetailContext2 = createContext();
 
 function App() {
   // State for storing the items in the cart
@@ -15,26 +16,28 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/singleProduct/:ids"
-          element={
-            <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
+      <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/singleProduct/:ids"
+            element={
+              // <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
               <SingleProduct />
-            </CartDetailContext.Provider>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
+              // </CartDetailContext.Provider>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              // <CartDetailContext.Provider value={{ cartItems, setCartItems }}>
               <Cart />
-            </CartDetailContext.Provider>
-          }
-        />
-      </Routes>
+              // </CartDetailContext.Provider>
+            }
+          />
+        </Routes>
+      </CartDetailContext.Provider>
     </>
   );
 }

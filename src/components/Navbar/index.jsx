@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/home2.gif";
 import Cart from "../../assets/cart.gif";
 import NavLinks from "./NavLinks";
+import { CartDetailContext } from "../../App";
 
 const Navbar = () => {
   const bottomToTop = () => {
@@ -11,6 +12,8 @@ const Navbar = () => {
       behavior: "smooth",
     });
   };
+
+  const { cartItems } = useContext(CartDetailContext);
 
   return (
     <nav className=" bg-white sticky top-0 border-b border-blue-500 shadow-xl">
@@ -32,10 +35,11 @@ const Navbar = () => {
           </li>
           <NavLinks />
         </ul>
-        <div>
+        <div className="flex">
           <NavLink to="/cart">
             <img src={Cart} alt="logo" className="cursor-pointer h-14" />
           </NavLink>
+          <div className="">{cartItems.length}</div>
         </div>
       </div>
     </nav>
